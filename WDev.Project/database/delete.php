@@ -5,7 +5,7 @@ include('connection.php');
 // Get the POST data
 $data = $_POST;
 
-// Check if this is a user or product deletion request
+// Check if this is a user, product, or supplier deletion request
 if (isset($data['table'])) {
     switch ($data['table']) {
         case 'users':
@@ -13,6 +13,9 @@ if (isset($data['table'])) {
             break;
         case 'products':
             handleProductDeletion($data, $conn);
+            break;
+        case 'suppliers':
+            handleSupplierDeletion($data, $conn);
             break;
         default:
             echo json_encode([
@@ -48,7 +51,7 @@ function handleUserDeletion($data, $conn) {
             if ($stmt->rowCount() > 0) {
                 echo json_encode([ 
                     'success' => true,
-                    'message' => 'User successfully deleted.'
+                    'message' => 'User  successfully deleted.'
                 ]);
             } else {
                 echo json_encode([
@@ -57,7 +60,7 @@ function handleUserDeletion($data, $conn) {
                 ]);
             }
         } catch (PDOException $e) {
-            error_log('User Delete Error: ' . $e->getMessage());
+            error_log('User  Delete Error: ' . $e->getMessage());
             echo json_encode([
                 'success' => false, 
                 'message' => 'Error deleting user: ' . $e->getMessage()
@@ -143,3 +146,62 @@ function handleProductDeletion($data, $conn) {
         ]);
     }
 }
+
+function handleSupplierDeletion($data, $conn) {
+    // Validate the input
+    if (isset($data['id']) && is_numeric($data['id'])) {
+        $supplier_id = (int)$data['id'];
+
+        try {
+            // Check if supplier has any associated products first
+            $checkProductsCommand = "SELECT COUNT(*) FROM productsuppliers WHERE supplier = :supplier_id";
+            $checkProductsStmt = $conn->prepare($checkProductsCommand);
+            $checkProductsStmt->bindParam(':supplier_id', $supplier_id, PDO::PARAM_INT);
+            $checkProductsStmt->execute();
+            $productCount = $checkProductsStmt->fetchColumn();
+
+            if ($productCount > 0) {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'Cannot delete supplier - they have associated products.'
+                ]);
+                return;
+            }
+
+            // Prepare the SQL statement for deleting the supplier
+            $command = "DELETE FROM suppliers WHERE id = :supplier_id";
+            $stmt = $conn->prepare($command);
+            
+            // Bind the parameter
+            $stmt->bindParam(':supplier_id', $supplier_id, PDO::PARAM_INT);
+            
+            // Execute the statement
+            $stmt->execute();
+
+            // Check if any rows were affected
+            if ($stmt->rowCount() > 0) {
+                echo json_encode([ 
+                    'success' => true,
+                    'message' => 'Supplier successfully deleted.'
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'message' => 'No supplier found with the provided ID.'
+                ]);
+            }
+        } catch (PDOException $e) {
+            error_log('Supplier Delete Error: ' . $e->getMessage());
+            echo json_encode([
+                'success' => false, 
+                'message' => 'Error deleting supplier: ' . $e->getMessage()
+            ]);
+        }
+    } else {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Invalid supplier ID provided.'
+        ]);
+    }
+}
+

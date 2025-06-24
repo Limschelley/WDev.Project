@@ -19,7 +19,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Dashboard - Inventory Management System</title>
+	<title>Dashboard - J&B Product Inventory System</title>
 	<link rel="stylesheet" type="text/css" href="css/login.css">
 	<script src="https://use.fontawesome.com/0c7a3095b5.js"></script>
 </head>

@@ -14,8 +14,8 @@
 	<div class="banner">
 		<div class="homepageContainer">
 			<div class="bannerHeader">				
-				<h1>IMS</h1>
-				<p>Inventory Management System</p>
+				<h1>J&B</h1>
+				<p>J&B Product Inventory System</p>
 			</div>
 			<p class="bannerTagline">
 				Track your goods throughout your entire supply chain, from purchasing to production to end sales
@@ -58,9 +58,6 @@
 							<button>Notify</button>
 						</div>
 					</form>
-				</div>
-				<div class="video">
-					<iframe src="https://www.youtube.com/embed/48VkVOHYGWw" frameborder="0"></iframe>
 				</div>
 			</div>
 		</div>
