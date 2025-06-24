@@ -5,7 +5,7 @@
 <div class="dashboard_sidebar" id="dashboard_sidebar">
 	<h3 class="dashboard_logo" id="dashboard_logo">J&B</h3>
 	<div class="dashboard_sidebar_user">
-		<img src="images/user/user-1.jpg" alt="User image." id="userImage" />
+		<img src="images/user/icon2.png" alt="User image." id="userImage" />
 		<span><?= $user['first_name'] . ' ' . $user['last_name'] ?></span>
 	</div>
 	<div class="dashboard_sidebar_menus">
