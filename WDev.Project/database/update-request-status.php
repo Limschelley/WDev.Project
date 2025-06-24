@@ -13,7 +13,7 @@
 			$stmt->execute();
 			$product = $stmt->fetch();
 			$cur_stock = (int) $product['stock'];
-			$updated_stock = $cur_stock + (int) $stock_requested;
+			$updated_stock = $cur_stock + (int) $stock_requested; 
 
 			$sql = "UPDATE products SET stock=? WHERE id=?";
 			$stmt = $conn->prepare($sql);

@@ -83,7 +83,7 @@
      		// Click
      		document.addEventListener('click', function(e){
      			let target = e.target;
-
+				classList = target.classList;
      			// Check if class name - moduleFunc - is clicked
      			if(target.classList.contains('moduleFunc')){
      				// Get value

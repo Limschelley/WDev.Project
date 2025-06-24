@@ -99,7 +99,7 @@
 					$stmt = $conn->prepare($sql);
 					$stmt->execute($supplier_data);
 				}
-			}
+			} 
 		}
 
 
