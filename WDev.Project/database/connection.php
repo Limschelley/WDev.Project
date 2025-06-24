@@ -3,8 +3,6 @@
 	$username = 'root';
 	$password = '';
 
-
-	// Connecting to database.
 	try {
 		$conn = new PDO("mysql:host=$servername;dbname=inventory_main", $username, $password);
 		// set the PDO error mode to exception.

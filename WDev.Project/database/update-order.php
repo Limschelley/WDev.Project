@@ -78,13 +78,6 @@
 		];
 
 		
-	// } catch (\Exception $e) {
-		
-	// 	$response = [
-	// 		'success' => false,
-	// 		'message' => "Error processing your request"
-	// 	];
-	// }
 	
 	echo json_encode($response);
 

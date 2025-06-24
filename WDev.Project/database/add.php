@@ -16,7 +16,7 @@
 		else if ($column == 'created_by') $value = $user['id'];
 		else if ($column == 'password') $value = password_hash($_POST[$column], PASSWORD_DEFAULT);
 		else if ($column == 'img') {
-			// Upload or move the file to our directory
+			// Upload or move the file to directory
 			$target_dir = "../uploads/products/";
 			$file_data = $_FILES[$column];
 
@@ -48,7 +48,7 @@
 	$table_properties = implode(", ",   array_keys($db_arr));
 	$table_placeholders = ':' . implode(", :", array_keys($db_arr));
 
-	// Add error handler if permissions is empty.
+	// Adding error handler if permissions is empty.
 	if(isset($db_arr['permissions'])){
 		if($db_arr['permissions'] == ''){
 			$_SESSION['response'] = [

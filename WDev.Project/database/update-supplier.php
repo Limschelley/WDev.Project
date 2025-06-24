@@ -1,4 +1,4 @@
-<<?php
+<?php
 // Start session and check authentication
 session_start();
 if (!isset($_SESSION['user'])) {
@@ -91,6 +91,6 @@ try {
     $response['message'] = $e->getMessage();
 }
 
-// Return JSON response
+
 echo json_encode($response);
 ?>
